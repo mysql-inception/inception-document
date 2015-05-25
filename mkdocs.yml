@@ -2,7 +2,7 @@ site_name: Inception使用规范及说明文档
 theme: readthedocs
 pages: 
  - [index.md, 'Inception使用规范及说明文档']
- - [chapter1.md, '关于的Inception序']
+ - [chapter1.md, 'Inception序']
  - [source.md, '1. Inception 是如何诞生的']
  - [inception.md, '2. Inception 总述及体系结构']
  - [install.md, '3. Inception 安装说明']
