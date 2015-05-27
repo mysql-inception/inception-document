@@ -5,23 +5,23 @@ Inception已经支持Percon ToolKit工具**`pt-online-schema-change`**，这样�
 --------
 |参数名称                                	| 作用域  	 |默认值 	 |说明
 |:-----------------------------------------------|:---------|:-------------------|:-------|
-|inception_osc_bin_dir                   	| GLOBAL  	 |无     	 |用于指定pt-online-schema-change脚本的位置，不可修改，在配置文件中设置
-|inception_osc_check_interval            	| SESSION 	 |5秒    	 |对应参数--check-interval，意义是Sleep time between checks for --max-lag.
-|inception_osc_chunk_size                	| SESSION 	 |1000   	 |对应参数--chunk-size
-|inception_osc_chunk_size_limit          	| SESSION 	 |4      	 |对应参数--chunk-size-limit
-|inception_osc_chunk_time                	| SESSION 	 |1      	 |对应参数--chunk-time
-|inception_osc_critical_thread_connected 	| SESSION 	 |1000   	 |对应参数--critical-load中的thread_connected部分
-|inception_osc_critical_thread_running   	| SESSION 	 |80     	 |对应参数--critical-load中的thread_running部分
-|inception_osc_drop_new_table            	| SESSION 	 |1      	 |对应参数--[no]drop-new-table
-|inception_osc_drop_old_table            	| SESSION 	 |1      	 |对应参数--[no]drop-old-table
-|inception_osc_max_lag                   	| SESSION 	 |3      	 |对应参数--max-lag
-|inception_osc_max_thread_connected      	| SESSION 	 |1000   	 |对应参数--max-load中的thread_connected部分
-|inception_osc_max_thread_running        	| SESSION 	 |80     	 |对应参数--max-load中的thread_running部分
-|inception_osc_min_table_size            	| SESSION 	 |16     	 |这个参数实际上是一个OSC的开关，如果设置为0，则全部ALTER语句都走OSC，如果设置为非0，则当这个表占用空间大小大于这个值时才使用OSC方式。
-|inception_osc_on                        	| GLOBAL  	 |1      	 |一个全局的OSC开关，默认是打开的，如果想要关闭则设置为OFF，这样就会直接修改
-|inception_osc_print_sql                 	| GLOBAL  	 |1      	 |对应参数--print
-|inception_osc_print_none                	| GLOBAL  	 |1      	 |用来设置在Inception返回结果集中，对于原来OSC在执行过程的标准输出信息是不是要打印到结果集对应的错误信息列中，如果设置为1，就不打印，如果设置为0，就打印。而如果出现错误了，则都会打印
-
+|inception_osc_bin_dir                   	| GLOBAL  	 |无     	 |用于指定pt-online-schema-change脚本的位置，不可修改，在配置文件中设置|
+|inception_osc_check_interval            	| SESSION 	 |5秒    	 |对应参数--check-interval，意义是Sleep time between checks for --max-lag.|
+|inception_osc_chunk_size                	| SESSION 	 |1000   	 |对应参数--chunk-size|
+|inception_osc_chunk_size_limit          	| SESSION 	 |4      	 |对应参数--chunk-size-limit|
+|inception_osc_chunk_time                	| SESSION 	 |1      	 |对应参数--chunk-time|
+|inception_osc_critical_thread_connected 	| SESSION 	 |1000   	 |对应参数--critical-load中的thread_connected部分|
+|inception_osc_critical_thread_running   	| SESSION 	 |80     	 |对应参数--critical-load中的thread_running部分|
+|inception_osc_drop_new_table            	| SESSION 	 |1      	 |对应参数--[no]drop-new-table|
+|inception_osc_drop_old_table            	| SESSION 	 |1      	 |对应参数--[no]drop-old-table|
+|inception_osc_max_lag                   	| SESSION 	 |3      	 |对应参数--max-lag|
+|inception_osc_max_thread_connected      	| SESSION 	 |1000   	 |对应参数--max-load中的thread_connected部分|
+|inception_osc_max_thread_running        	| SESSION 	 |80     	 |对应参数--max-load中的thread_running部分|
+|inception_osc_min_table_size            	| SESSION 	 |16     	 |这个参数实际上是一个OSC的开关，如果设置为0，则全部ALTER语句都走OSC，如果设置为非0，则当这个表占用空间大小大于这个值时才使用OSC方式。单位为M，这个表大小的计算方式是通过语句： **"select (DATA_LENGTH + INDEX_LENGTH)/1024/1024 from information_schema.tables where table_schema = 'dbname' and table_name = 'tablename'"**来实现的。|
+|inception_osc_on                        	| GLOBAL  	 |1      	 |一个全局的OSC开关，默认是打开的，如果想要关闭则设置为OFF，这样就会直接修改|
+|inception_osc_print_sql                 	| GLOBAL  	 |1      	 |对应参数--print|
+|inception_osc_print_none                	| GLOBAL  	 |1      	 |用来设置在Inception返回结果集中，对于原来OSC在执行过程的标准输出信息是不是要打印到结果集对应的错误信息列中，如果设置为1，就不打印，如果设置为0，就打印。而如果出现错误了，则都会打印|
+|
 ----------
 
 
