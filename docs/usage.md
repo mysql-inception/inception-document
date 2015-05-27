@@ -41,7 +41,7 @@ try:
     print field_names
     for row in result:
         print row[0], "|",row[1],"|",row[2],"|",row[3],"|",row[4],"|",
-		row[5],"|",row[6],"|",row[7],"|",row[8],"|",row[9]
+		row[5],"|",row[6],"|",row[7],"|",row[8],"|",row[9],"|",row[10]
     cur.close()
     conn.close()
 except MySQLdb.Error,e:
@@ -52,7 +52,7 @@ except MySQLdb.Error,e:
 ````
 ['ID', 'stage', 'errlevel', 'stagestatus', 'errormessage', 'SQL', 'Affected_rows', 
 'sequence', 'backup_dbname', 'execute_time', 'sqlsha1']  
-1 | CHECKED | 0 | Audit completed | None | use mysql | 0 | '0_0_0' | None |     0  
+1 | CHECKED | 0 | Audit completed | None | use mysql | 0 | '0_0_0' | None |     0  |
 2 | CHECKED | 1 | Audit completed | Set engine to innodb for table 'adaptive_office'.  
 Set charset to one of 'utf8mb4' for table 'adaptive_office'.  
 Set comments for table 'adaptive_office'.  
@@ -60,10 +60,12 @@ Column 'id' in table 'adaptive_office' have no comments.
 Column 'id' in table 'adaptive_office' is not allowed to been nullable.  
 Set Default value for column 'id' in table 'adaptive_office'  
 Set a primary key for table 'adaptive_office'. | CREATE TABLE adaptive_office(id int) 
-| 0 | '0_0_1' | 127_0_0_1_3306_mysql |     0
+| 0 | '0_0_1' | 127_0_0_1_3306_mysql |     0|
 ````
 
 从返回结果可以看到，每一行语句的审核及执行信息，最前面打印的是field_names，表示Inception的返回结果集的列名信息，总共包括十个列，下面是每个列对应的结果，因为只有两个语句，则只有两行，从结果集第一个列看到只有序号为1和2的两行，而对于每一个列的具体含义，这会在<<**Inception结果集**>>这一章中讲到，这里只看清楚是什么内容即可。
+
+**注意**：最后一个“|”后面其实是存储列sqlsha1的，但这里没有改表语句，所以都是空，关于这个信息，请看<<**Inception结果集**>>一章及<<**Inception 对OSC的支持**>>一章中相关说明。
 
 
 -------------

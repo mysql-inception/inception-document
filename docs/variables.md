@@ -36,7 +36,7 @@ Inception目前所支持的变量参数如下表所示：
 |inception_check_primary_key              	 |ON/OFF          	 |On        	 |建表时，如果没有主键，则报错|  
 |inception_enable_partition_table         	 |ON/OFF          	 |OFF       	 |是不是支持分区表|  
 |inception_enable_enum_set_bit            	 |ON/OFF          	 |OFF       	 |是不是支持enum,set,bit数据类型|  
-|inception_check_index_prefix             	 |ON/OFF          	 |OFF       	 |是不是要检查索引名字前缀为idx_|  
+|inception_check_index_prefix             	 |ON/OFF          	 |ON            |是不是要检查索引名字前缀为"idx_"，检查唯一索引前缀是不是"uniq_"|  
 |inception_enable_autoincrement_unsigned  	 |ON/OFF          	 |ON        	 |自增列是不是要为无符号型|  
 |inception_max_char_length                	 |1-MAX           	 |16        	 |当char类型的长度大于这个值时，就提示将其转换为VARCHAR|  
 |inception_check_autoincrement_init_value 	 |ON/OFF          	 |ON        	 |当建表时自增列的值指定的不为1，则报错|  
