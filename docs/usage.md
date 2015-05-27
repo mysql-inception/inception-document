@@ -26,7 +26,7 @@ inception_magic_commit;
 \#!/usr/bin/python
 \#-\*-coding: utf-8-\*-
 import MySQLdb
-sql='/\*--user=username;--password=password;--host=127.0.0.1;--execute=1;--port=3306;*/\
+sql='/*--user=username;--password=password;--host=127.0.0.1;--execute=1;--port=3306;*/\
 inception_magic_start;\
 use mysql;\
 CREATE TABLE adaptive_office(id int);\
@@ -45,7 +45,7 @@ try:
     cur.close()
     conn.close()
 except MySQLdb.Error,e:
-     print "Mysql Error %d: %s" % (e.args[0], e.args[1])>
+     print "Mysql Error %d: %s" % (e.args[0], e.args[1])
 ````
 
 执行这段程序之后，返回的结果如下：  
