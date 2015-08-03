@@ -28,7 +28,7 @@ read_only | OFF 
 read_rnd_buffer_size | 262144
 ````
 **注意**：因为查看远程变量，是需要连到远程数据库服务器的，所以执行时还是必须要加上前面的数据源信息的，不然在MySQL客户只支持这个语句会报错。
-![](images/showerr.png)
+![](inception_images/showerr.png)
 这个就是在提醒，必须要放在`inception_magic_start`及`inception_magic_commit`语句中才能执行。
 
 ###显示本地全部变量  
@@ -37,7 +37,7 @@ read_rnd_buffer_size | 262144
 inception get variables;
 ````
 输出就是所有的变量，下图所示为部分变量：
-![](images/variables.png)
+![](inception_images/variables.png)
 **注意**，这个命令只显示Inception本身的一些参数变量的值，那么是不需要数据源信息的，所以它是可以直接在MySQL客户端执行的。
 ###显示本地某个变量
 显示本地某个变量，和上面唯一的区别是，这只显示一个变量的值，而上面是显示全部，语法：
@@ -45,7 +45,7 @@ inception get variables;
 inception get variables 'variable_name';
 ````
 下面是图例：
-![](images/onevar.png)
+![](inception_images/onevar.png)
 
 **注意**，这个命令只显示Inception本身的一些参数变量的值，那么是不需要数据源信息的，所以它是可以直接在MySQL客户端执行的，而如果放在数据源信息中执行的话，这样的语句会被忽略，不会做任何处理。
 ###设置本地变量  
@@ -55,16 +55,16 @@ inception set [session] variables_name=value;
 ````
 **注意**，这个命令只显示Inception本身的一些参数变量的值，那么是不需要数据源信息的，所以它是可以直接在MySQL客户端执行的，而如果放在数据源信息中执行的话，这样的语句会被忽略，不会做任何处理。
 下面是图例：
-![](images/oscset.png)
+![](inception_images/oscset.png)
 ###显示OSC执行进度  
 这个语句的作用是，当某一个ALTER TABLE语句正在通过Inception使用OSC执行时，可以通过这个语句来查询执行的进度度信息，语法：
 ````
 inception get osc_percent '当前执行的SQL语句以及一些基本信息生成的SHA1哈希值';
 ````
 具体的细节会在后面专门的一章<<**Inception 对OSC的支持**>>中讲述，这里只看一下图例：
-![](images/osc.png)
+![](inception_images/osc.png)
 
 上面是正在做的，而如果语句块中有多个修改表的操作，则前面的会看到执行完成的进度信息：
-![](images/osccomplete.png)
+![](inception_images/osccomplete.png)
 
 

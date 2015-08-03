@@ -52,7 +52,7 @@ Inception目前所支持的变量参数如下表所示：
 |bind_address|string|*|这个参数实际上就是MySQL数据库原来的参数，因为Incpetion没有权限验证过程，那么为了实现更安全的访问，可以给Inception服务器的这个参数设置某台机器（Inception上层的应用程序）不地址，这样其它非法程序是不可访问的，那么再加上Inception执行的选项中的用户名密码，对MySQL就更加安全|
 |general_log|ON/OFF|ON|这个参数就是原生的MySQL的参数，用来记录在Inception服务上执行过哪些语句，用来定位一些问题等|
 |general_log_file|string|inception.log|设置general log写入的文件路径|
-|inception_user|string|empty|这个用户名在配置之后，在连接Inception的选项中可以不指定user，这样线上数据库的用户名及密码就可以不暴露了，可以做为临时使用的一种方式|
+|inception_user|string|empty|这个用户名在配置之后，在连接Inception的选项中可以不指定user，这样线上数据库的用户名及密码就可以不暴露了，可以做为临时使用的一种方式，但这个用户现在只能是用来审核，也就是说，即使在选项中指定--enable-execute，也不能执行，这个是只能用来审核的帐号。|
 |inception_password|string|empty|与上面的参数是一对，这个参数对应的是选项中的password，设置这个参数之后，可以在选项中不指定password|
 |inception_enable_sql_statistic|ON/OFF|ON|设置是不是支持统计Inception执行过的语句中，各种语句分别占多大比例，如果打开这个参数，则每次执行的情况都会在备份数据库实例中的inception库的statistic表中以一条记录存储这次操作的统计情况，每次操作对应一条记录，这条记录中含有的信息是各种类型的语句执行次数情况，具体的信息需要参考后面一章<<**Inception 的统计功能**>>|
 |inception_read_only|ON/OFF|OFF|设置当前Inception服务器是不是只读的，这是为了防止一些人具有修改权限的帐号时，通过Inception误修改一些数据，如果inception_read_only设置为ON，则即使开了enable-execute，同时又有执行权限，也不会去执行，审核完成即返回|

@@ -17,4 +17,4 @@ pages:
  - [extras.md, '12. Inception 额外功能说明']
  - [osc.md, '13. Inception 对OSC的支持']
  - [statistic.md, '14. Inception 的统计功能']
- - [bugs.md, '15. Inception 已知BUG']
+ - [release.md, '15. Inception 发布日志']

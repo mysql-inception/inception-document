@@ -6,7 +6,7 @@ SQL统计功能涉及到的参数为： **inception_enable_sql_statistic**, 这�
 除了上面的参数之外，使用这个功能还需要开启操作备份功能，因为这些统计数据需要存储到备份数据库中，存储的数据库名为**inception**中，这个数据库主要是用来存储Inception的一些统计信息的，现在只有一个表**statistic**，这个表存储的就是SQL执行数目的统计数据，而以后有可能还会做一些扩展而新生成一些表。
 
 **statistic**表的结构如下：
-![](images/statistic.png)
+![](inception_images/statistic.png)
 
 从每一个列的名字就可以看到，其值对应的操作是什么，每一个列就是一个自增列，第二个列optime是操作时间，这个主要是用来统计在某一段时间内的某一个操作占多少比例。
 
