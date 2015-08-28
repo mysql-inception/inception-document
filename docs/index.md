@@ -14,7 +14,5 @@ https://github.com/mysql-inception/inception.git
 
 #联系方式
 王竹峰  
-**QQ**：329570985  
-**手机**：18612563438  
 **邮箱**：doathink@gmail.com  
 Inception讨论QQ群：185803996
