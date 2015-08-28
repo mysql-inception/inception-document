@@ -26,7 +26,7 @@ Inception目前所支持的变量参数如下表所示：
 |inception_enable_orderby_rand            	 |ON/OFF          	 |ON        	 |order by rand时是不是报错|  
 |inception_enable_nullable                	 |ON/OFF          	 |ON        	 |创建或者新增列时如果列为NULL，是不是报错|  
 |inception_enable_foreign_key             	 |ON/OFF          	 |ON        	 |是不是支持外键|  
-|Inception_max_key_parts                  	 |1-64            	 |5         	 |一个索引中，列的最大个数，超过这个数目则报错|  
+|inception_max_key_parts                  	 |1-64            	 |5         	 |一个索引中，列的最大个数，超过这个数目则报错|  
 |inception_max_update_rows                	 |1-MAX           	 |10000     	 |在一个修改语句中，预计影响的最大行数，超过这个数就报错|  
 |inception_max_keys                       	 |1-1024          	 |16        	 |一个表中，最大的索引数目，超过这个数则报错|  
 |inception_enable_not_innodb              	 |ON/OFF          	 |OFF       	 |建表指定的存储引擎不为Innodb，不报错|  

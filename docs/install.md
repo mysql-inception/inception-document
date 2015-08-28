@@ -33,9 +33,12 @@ inception_check_column_default_value=1
 
 现在就到启动时间了，那么启动有两种方式，和MySQL是一样的  
 1. Inception --defaults-file=inc.cnf  
-2. Inception --port=7777  
+2. Inception --port=6669
 
 第二种方法就是只指定一个端口，其它参数都是默认值，而第一种方法就是在配置文件中可以指定很多参数，按照自己喜欢的规则来配置。
+
+**注意**：
+因为Inception支持OSC执行的功能，是通过调用pt-online-schema-change工具来做的，但如果Inception后台启动（&）的话，可能会导致pt-online-schema-change在执行完成之后，长时间不返回，进而导致Inception卡死的问题，这个问题后面会解决，但现阶段请尽量不要使用后台启动的方式，或者可以使用`nohup inception &`的方式来启动。
 
 启动如果不报错的话，说明已经启动成功了，实际上很难让它报错，因为非常轻量级
 
