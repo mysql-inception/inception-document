@@ -4,6 +4,18 @@
 首先就是编译，在源码根目录下面有一个文件inception_build.sh，执行命令`sh inception_build.sh`，会输出使用方法。
 实际上只需要执行`inception_build.sh debug [Xcode]`即可，后面的平台是可选的，如果不指定就是linux平台，而如果要指定是Xcode，就后面指定Xcode，而debug是编译的目录，编译之后，所有的生成文件都在这个目录下面，包括可执行文件Inception。可执行文件在`debug/sql/Debug/`目录下面（不同平台有可能不相同）。
 
+介于在发布之后，很多人使用的是Ubuntu操作系统，这个与其它的有点不同，这里单独说一下在这个下面的编译步骤（其实需要安装的都是编译时所依赖的包，有则略之，无则装之，其它系统仿照这个应该可以轻松搞定）：
+
+1. 下载bison：http://ftp.gnu.org/gnu/bison/，版本最好是2.6之前的，最新的可能会有问题
+2. cmake安装：apt-get install cmake
+3. ncurses安装：apt-get install libncurses5-dev
+4. 安装openssl：apt-get install libssl-dev
+5. 安装g++：sudo apt-get install g++
+
+安装完成这些，应该是没什么问题了，那么需要注意的是，每次如果出错之后，需要把编译目录删除掉，重新执行，不然会执行出错。
+
+顺便强调说一下，实际上编译Inception，和编译MySQL源码是一样的，如果有不太了解的同学，可以先在网上看看关于MySQL源码的编译，我想遇到的问题都可以解决。
+
 编译完成之后，就是使用了，那么需要一个配置文件（inc.cnf）:
 ````
 [inception]
@@ -38,7 +50,7 @@ inception_check_column_default_value=1
 第二种方法就是只指定一个端口，其它参数都是默认值，而第一种方法就是在配置文件中可以指定很多参数，按照自己喜欢的规则来配置。
 
 **注意**：
-因为Inception支持OSC执行的功能，是通过调用pt-online-schema-change工具来做的，但如果Inception后台启动（&）的话，可能会导致pt-online-schema-change在执行完成之后，长时间不返回，进而导致Inception卡死的问题，这个问题后面会解决，但现阶段请尽量不要使用后台启动的方式，或者可以使用`nohup inception &`的方式来启动。
+因为Inception支持OSC执行的功能，是通过调用pt-online-schema-change工具来做的，但如果Inception后台启动（&）的话，可能会导致pt-online-schema-change在执行完成之后，长时间不返回，进而导致Inception卡死的问题，这个问题后面会解决，但现阶段请尽量不要使用后台启动的方式，或者可以使用`nohup Inception启动命令 &`的方式来启动。
 
 启动如果不报错的话，说明已经启动成功了，实际上很难让它报错，因为非常轻量级
 
