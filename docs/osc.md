@@ -42,6 +42,7 @@ inception get osc_percent '当前执行的SQL语句以及一些基本信息生�
 * **SQLSHA1**：当前要查询的语句的SHA1字符串；
 * **PERCENT**：当前修改已经完成的百分比，这个值是0到100的值。
 * **REMAINTIME**：当前修改语句还需要多久才能完成，如03:55表示还需要三分55秒，01:33:44表示还需要1小时33分44秒。
+* **INFOMATION**：显示当前OSC执行时的状态信息，内容为OSC当前所有的输出信息，不包括百分比信息，百分比还是由上面的列来显示，这个方便在使用时随时查看执行到哪一步了，可以更加清楚的了解到执行进度。
 
 下图是在ALTER的时候，查到的正在做的信息：
 ![](inception_images/osc.png)
@@ -59,7 +60,7 @@ inception get osc_percent '当前执行的SQL语句以及一些基本信息生�
 1 | CHECKED | 0 | Audit completed | None | use sbtest | 0 | '0_0_0' | None | 0 |
 2 | CHECKED | 0 | Audit completed | None | alter table sbtest1 add c2 int not null default 'a' comment 'for test' | 449234 | '0_0_1' | 127_0_0_1_3306_sbtest | 0 | *F270A6902BB3A0E2DE042A60D79F55418C8D1C00
 ````
-其中"***F270A6902BB3A0E2DE042A60D79F55418C8D1C00**"就是上面ALTER语句对应的SQLSHA1值。
+其中"***98A11AC683C0D121568A51CA33A3A94674326630**"就是上面ALTER语句对应的SQLSHA1值。
 
 当进入执行阶段之后，在执行当前语句时，OSC会向inception返回进度信息，Inception在收到之后，会根据当前语句的SHA1值更新对应的进度信息，OSC会每百分之一返回一次进度信息，那Inception都会更新当前语句对应的进度信息，OSC不会返回100%，最大99%，而Inception做了处理，当检查到有successfully altered的信息之后，就将进度信息改为100%，剩余时间为00:00，而99%到100%之间做的事情包括清除环境的操作，所以时间可能比之前的1%的时间要长。
 

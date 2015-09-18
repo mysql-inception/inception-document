@@ -6,7 +6,7 @@
 
 介于在发布之后，很多人使用的是Ubuntu操作系统，这个与其它的有点不同，这里单独说一下在这个下面的编译步骤（其实需要安装的都是编译时所依赖的包，有则略之，无则装之，其它系统仿照这个应该可以轻松搞定）：
 
-1. 下载bison：http://ftp.gnu.org/gnu/bison/，版本最好是2.6之前的，最新的可能会有问题
+1. 下载bison：[http://ftp.gnu.org/gnu/bison/](http://ftp.gnu.org/gnu/bison/)，版本最好是2.6之前的，最新的可能会有问题，下载之后，需要自己编译源码来安装，具体安装方法，可以参数网上的一些说明。
 2. cmake安装：apt-get install cmake
 3. ncurses安装：apt-get install libncurses5-dev
 4. 安装openssl：apt-get install libssl-dev
@@ -22,7 +22,7 @@
 general_log=1
 general_log_file=inception.log
 port=6669
-socket=/data/workspace/inception_data/inc.socket
+socket=/自己目录，请自行修改/inc.socket
 character-set-client-handshake=0
 character-set-server=utf8
 inception_remote_system_password=root
@@ -37,15 +37,14 @@ inception_check_table_comment=1
 inception_osc_min_table_size=1
 inception_osc_bin_dir=/data/temp
 inception_osc_chunk_time=0.1
-inception_ddl_support=1
 inception_enable_blob_type=1
 inception_check_column_default_value=1
 ````
-上面这些参数的配置都是本人随便举例而已。
+上面这些参数的配置都是本人随便举例而已。具体每个参数的意义，请参照后面章节<<**Inception所支持的参数变量**>>
 
-现在就到启动时间了，那么启动有两种方式，和MySQL是一样的  
-1. Inception --defaults-file=inc.cnf  
-2. Inception --port=6669
+现在就到启动时间了，那么启动有两种方式，和MySQL是一样的，Inception可执行文件可以在编译目录下面通过find命令找到，编译目录就是在执行inception_build.sh脚本时指定的目录。
+1. 所在目录/Inception --defaults-file=inc.cnf  
+2. 所在目录/Inception --port=6669
 
 第二种方法就是只指定一个端口，其它参数都是默认值，而第一种方法就是在配置文件中可以指定很多参数，按照自己喜欢的规则来配置。
 
