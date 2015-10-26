@@ -18,6 +18,7 @@ Inception已经支持Percon ToolKit工具**`pt-online-schema-change`**，这样�
 |inception_osc_max_lag                   	| SESSION 	 |3      	 |对应参数--max-lag|
 |inception_osc_max_thread_connected      	| SESSION 	 |1000   	 |对应参数--max-load中的thread_connected部分|
 |inception_osc_max_thread_running        	| SESSION 	 |80     	 |对应参数--max-load中的thread_running部分|
+|inception_osc_recursion_method| SESSION|processlist      	 |对应OSC参数recursion_method，具体意义可以参考OSC官方手册|
 |inception_osc_min_table_size            	| SESSION 	 |16     	 |这个参数实际上是一个OSC的开关，如果设置为0，则全部ALTER语句都走OSC，如果设置为非0，则当这个表占用空间大小大于这个值时才使用OSC方式。单位为M，这个表大小的计算方式是通过语句： **"select (DATA_LENGTH + INDEX_LENGTH)/1024/1024 from information_schema.tables where table_schema = 'dbname' and table_name = 'tablename'"**来实现的。|
 |inception_osc_on                        	| GLOBAL  	 |1      	 |一个全局的OSC开关，默认是打开的，如果想要关闭则设置为OFF，这样就会直接修改|
 |inception_osc_print_sql                 	| GLOBAL  	 |1      	 |对应参数--print|
@@ -80,6 +81,14 @@ inception stop alter '当前执行的SQL语句以及一些基本信息生成的S
 2. 在取消语句的错误描述信息中，报错为`"Execute has been abort in percent: 已执行比例, remain time: 剩余时间"`  
 3. 在取消之后，当前语句之后的所有语句不会执行，当然状态为未执行。  
 4. 被取消语句，在取消之后，结果集stagestatus列的信息会设置为`"Execute Aborted"`。  
+##查看所有OSC执行信息
+语句如下：
+````
+inception get osc processlist;
+````
+这个语句的功能是打印所有当前正在使用OSC执行的操作，如果在同一个inception请求中有多个ALTER语句，那么显示出来的有可能存在执行进度为100%的语句，通过这个语句，可以轻松查看当前每一个OSC执行进度，如果是卡住了（比如存在从库复制延迟），在这里可以看到具体信息。
+
+实际上看到的信息和上面`inception get osc_percent '当前执行的SQL语句以及一些基本信息生成的SHA1哈希值'`返回的结果是一样的，只是这个返回了所有信息。
 
 ##后记
 **需要注意的是**，OSC全局参数最好别频繁修改，因为针对某一个语句的SHA1是分阶段的，生成是在审核阶段的，如果在审核时候没有打开，或者设置的表大小没有满足OSC方式，则不会生成SHA1，那么在执行时候，这个进度就不能被查询了，这个语句的执行情况就不能获取到，影响执行过程的体验。当然这个影响也不大，因为在执行完成之后，如果执行成功了，并且参数`inception_osc_print_none`为OFF，则会看到打印信息，里面包括成功或者失败的所有信息，而如果为ON，则如果结果集中有信息，则说明是执行错误了，如果没有则说明成功。

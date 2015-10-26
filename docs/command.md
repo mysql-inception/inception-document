@@ -68,3 +68,24 @@ inception get osc_percent '当前执行的SQL语句以及一些基本信息生�
 ![](inception_images/osccomplete.png)
 
 
+###查看当前processlist
+inception还可以查看当前正在执行的所有线程信息，语法为：
+````
+inception get processlist;
+````
+![](inception_images/processlist.png)
+当前命令执行之后，返回的结果信息如上图所示，每一个列介绍如下：
+
+1. id:一个简单的计数。
+2. dest_user:表示当前执行语句访问数据库时所用的用户名。
+3. dest_host:表示当前执行语句要访问的数据库地址。
+4. dest_port:表示当前执行语句要访问的数据库的端口。
+5. from_host:表示当前执行语句是从机器上发起的。
+6. command:表示当前执行的是什么操作，包括CHECK（简单审核），EXECUTE（执行），SPLIT（拆分），PRINT（打印计划树），LOCAL（本地命令）。
+7. state:表示在当前命令下，执行的状态是什么，状态包括INIT（初始阶段），CHECKING（正在审核），EXECUTING（正在执行），DEINIT（退出），BACKUP（正在备份）。
+8. time:表示当前语句执行所用时间。
+9. info:显示当前正在执行的语句。
+
+
+
+
