@@ -15,6 +15,8 @@ Inception已经支持Percon ToolKit工具**`pt-online-schema-change`**，这样�
 |inception_osc_critical_thread_running   	| SESSION 	 |80     	 |对应参数--critical-load中的thread_running部分|
 |inception_osc_drop_new_table            	| SESSION 	 |1      	 |对应参数--[no]drop-new-table|
 |inception_osc_drop_old_table            	| SESSION 	 |1      	 |对应参数--[no]drop-old-table|
+|inception_osc_check_replication_filters 	| SESSION 	 |1      	 |对应参数--[no]check-replication-filters|
+|inception_osc_check_alter    	   		| SESSION 	 |1      	 |对应参数--[no]check-alter|
 |inception_osc_max_lag                   	| SESSION 	 |3      	 |对应参数--max-lag|
 |inception_osc_max_thread_connected      	| SESSION 	 |1000   	 |对应参数--max-load中的thread_connected部分|
 |inception_osc_max_thread_running        	| SESSION 	 |80     	 |对应参数--max-load中的thread_running部分|
