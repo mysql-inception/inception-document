@@ -1,4 +1,8 @@
 #发布日志
+###2016年3月23日Inception2.1.23发布
+1. [**新增**]增加参数inception_osc_alter_foreign_keys_method，为了解决pt工具改表时 在没有外键的情况下，还是查information schema，导致在库表很多的情况下 非常慢的问题，加上这个参数，默认为none，就不会去查了，速度非常快，并且 可以减少内存的暴涨
+2. [**新增**]新增一种选项，--sleep，用来在执行每条语句之后，都可以在inception内部暂停指定ms数，单位为毫秒。这样可以缓解对线上数据库的冲击，详情请参照<<**Inception支持选项及意义**>>
+
 ###2015年10月26日Inception2.1.17发布
 1. [**新增**]新增inception get osc processlist的功能，这个语句可以查看所有当前正在执行的OSC线程。
 2. [**新增**]新增inception get processlist的功能，这个语句可以查看所有当前正在执行的线程。

@@ -19,6 +19,7 @@ Inception已经支持Percon ToolKit工具**`pt-online-schema-change`**，这样�
 |inception_osc_max_thread_connected      	| SESSION 	 |1000   	 |对应参数--max-load中的thread_connected部分|
 |inception_osc_max_thread_running        	| SESSION 	 |80     	 |对应参数--max-load中的thread_running部分|
 |inception_osc_recursion_method| SESSION|processlist      	 |对应OSC参数recursion_method，具体意义可以参考OSC官方手册|
+|inception_osc_alter_foreign_keys_method| SESSION|none|对应OSC参数alter-foreign-keys-method，具体意义可以参考OSC官方手册|
 |inception_osc_min_table_size            	| SESSION 	 |16     	 |这个参数实际上是一个OSC的开关，如果设置为0，则全部ALTER语句都走OSC，如果设置为非0，则当这个表占用空间大小大于这个值时才使用OSC方式。单位为M，这个表大小的计算方式是通过语句： **"select (DATA_LENGTH + INDEX_LENGTH)/1024/1024 from information_schema.tables where table_schema = 'dbname' and table_name = 'tablename'"**来实现的。|
 |inception_osc_on                        	| GLOBAL  	 |1      	 |一个全局的OSC开关，默认是打开的，如果想要关闭则设置为OFF，这样就会直接修改|
 |inception_osc_print_sql                 	| GLOBAL  	 |1      	 |对应参数--print|
@@ -68,7 +69,7 @@ inception get osc_percent '当前执行的SQL语句以及一些基本信息生�
 进度信息缓存有生命周期的，在整个语句块执行完成在退出前，相应的缓存信息就会被清除出去，之后再查询进度就查不到了。查不到的话，当前线程的阻塞也就返回了，说明已经完成。
 
 ##中止OSC的执行
-在执行OSC的过程中，有可能遇到的问题是，执行一部分了，突然发现对线上造成了MDL等待的现象，这种影响对一些业务是不可接受的，因为很多语句此时就不能执行当前表上面的任何操作了，必须要等OSC的一些辅助操作（建立/删除触发器）完成之后才可以，而OSC的这些操作又是在等待线上的一些慢查询语句执行完成才能继续执行下去，这种情况下，我们一般的处理方式是，先退出OSC执行，等在压力小的时候，或者可以多试几次，才可以继续执行下去，那么此时最需要DBA操作的就是取消当前这个OSC的执行，但在当前Inception还不支持这个，所以这个问题处理起来比较不方便，如果发现问题，还需要去线上Kill执行，效率以及友好性都不太好。所以考虑实现一个取消（中止）OSC执行的功能。
+在执行OSC的过程中，有可能遇到的问题是，执行一部分了，突然发现对线上造成了MDL等待的现象，这种影响对一些业务是不可接受的，因为很多语句此时就不能执行当前表上面的任何操作了，必须要等OSC的一些辅助操作（建立/删除触发器）完成之后才可以，而OSC的这些操作又是在等待线上的一些慢查询语句执行完成才能继续执行下去，这种情况下，我们一般的处理方式是，先退出OSC执行，等在压力小的时候，或者可以多试几次，才可以继续执行下去，那么此时最需要DBA操作的就是取消当前这个OSC的执行，所以考虑实现一个取消（中止）OSC执行的功能。
 
 取消方式与查询执行进度是一样的，还是通过一个新的Inception命令来实现，新的命令如下：
 ````
